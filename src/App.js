@@ -3,6 +3,16 @@ import './App.css';
 
 class App extends Component {
 
+  state = {
+    task: ""
+  }
+
+  handleChange = (event) => {
+    this.setState({
+      [event.target.name]: event.target.value
+    })
+  }
+
   render(){
     return (
       <div className="App">
@@ -11,7 +21,9 @@ class App extends Component {
             <input 
               type="text"
               placeholder="add todo" 
-              
+              name="task"
+              value={this.state.task}
+              onChange={this.handleChange}
             />
             <input type="submit"/>
         </form>
