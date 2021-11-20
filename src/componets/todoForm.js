@@ -1,8 +1,10 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import {connect} from 'react-redux';
+import {addTask} from '../actions/taskActions'
 
 class Todo extends Component {
     state = {
-        task: ""
+        name: ""
       }
     
       handleChange = (event) => {
@@ -10,26 +12,30 @@ class Todo extends Component {
           [event.target.name]: event.target.value
         })
       }
+
+      handleSubmit = (event) => {
+        event.preventDefault()
+        this.props.addTask(this.state)
+        this.setState({name: ""})
+      }
     
       render(){
         return (
           <div className="App">
             <h1>To Do List!</h1>
-            <form>
+            <form onSubmit={this.handleSubmit} > 
                 <input 
                   type="text"
                   placeholder="add todo" 
-                  name="task"
-                  value={this.state.task}
+                  name="name"
+                  value={this.state.name}
                   onChange={this.handleChange}
                 />
                 <input type="submit"/>
-            </form>
-    
-      
+            </form>    
           </div>
         );
       }
 }
 
-export default Todo
+export default connect(null, {addTask})(Todo) 
