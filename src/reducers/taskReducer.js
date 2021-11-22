@@ -7,6 +7,11 @@ export default function taskReducer(state = {tasks: []}, action) {
                 tasks: [...state.tasks, action.payload]
             }
 
+        case "GET_TASK":
+            return {
+                state, tasks: action.payload
+            }
+
         default: return state
     }
 }
